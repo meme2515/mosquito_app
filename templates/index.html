@@ -10,7 +10,14 @@
         <div class="box-2"><img src="{{ url_for('static', filename='image.gif') }}" width="100"></div>
       </div>
 
-      <form action="https://formbold.com/s/FORM_ID" method="POST">
+      {% if show_results %}
+        <label for="name" class="formbold-form-label"> 예측된 모기 출몰 지수 : </label>
+        <h1>{{ prediction_text }}</h1>
+        <br>
+        <br>
+      {% endif %}
+
+      <form action="{{ url_for('predict') }}" method="POST">
         <div class="formbold-input-group">
           <label for="rain" class="formbold-form-label"> 강수량 (mm) </label>
           <input
@@ -19,6 +26,7 @@
             id="rain"
             placeholder="강수량을 입력하세요"
             class="formbold-form-input"
+            required="required"
           />
         </div>
   
@@ -30,6 +38,7 @@
             id="avgtemp"
             placeholder="평균 기온을 입력하세요"
             class="formbold-form-input"
+            required="required"
           />
         </div>
   
@@ -41,19 +50,21 @@
             id="mintemp"
             placeholder="최소 기온을 입력하세요"
             class="formbold-form-input"
+            required="required"
           />
         </div>
 
         <div class="formbold-input-group">
-            <label for="maxtemp" class="formbold-form-label"> 최대 기온 (&#8451) </label>
-            <input
-              type="text"
-              name="maxtemp"
-              id="maxtemp"
-              placeholder="최대 기온을 입력하세요"
-              class="formbold-form-input"
-            />
-          </div>
+          <label for="maxtemp" class="formbold-form-label"> 최대 기온 (&#8451) </label>
+          <input
+            type="text"
+            name="maxtemp"
+            id="maxtemp"
+            placeholder="최대 기온을 입력하세요"
+            class="formbold-form-input"
+            required="required"
+          />
+        </div>
   
         <button class="formbold-btn">예측</button>
       </form>
