@@ -40,6 +40,6 @@ def predict():
         prediction_text = str(output) + output_class,
         show_results = 1 
     )
-
+# run
 if __name__ == "__main__":
     app.run(port=8000, debug=True)
