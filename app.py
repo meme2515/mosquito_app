@@ -1,5 +1,6 @@
-import numpy as np
 from flask import Flask, request, render_template
+from scripts.weather_api import api_call
+import numpy as np
 import pickle
 
 # Create app object using Flask class
@@ -16,7 +17,9 @@ def home():
 # Prediction
 @app.route('/predict', methods=['POST'])
 def predict():
-    features = [float(x) for x in request.form.values()]
+    loc1, loc2, loc3 = request.form.values()
+    api_resp = api_call(loc1, loc2, loc3)
+    features = [api_resp['rain'], api_resp['min_temp'], api_resp['max_temp']]
     features = np.array(features).reshape(1,-1)
     prediction = model.predict(features)
 

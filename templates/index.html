@@ -1,4 +1,15 @@
-<div class="formbold-main-wrapper">
+<!-- https://formbold.com/templates/survey-form -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+</head>
+<body>
+  <div class="formbold-main-wrapper">
     <!-- Author: FormBold Team -->
     <!-- Learn More: https://formbold.com -->
     <div class="formbold-form-wrapper">
@@ -19,45 +30,25 @@
 
       <form action="{{ url_for('predict') }}" method="POST">
         <div class="formbold-input-group">
-          <label for="rain" class="formbold-form-label"> 강수량 (mm) </label>
-          <input
-            type="text"
-            name="rain"
-            id="rain"
-            placeholder="강수량을 입력하세요"
-            class="formbold-form-input"
-            required="required"
-          />
+          <label class="formbold-form-label"> 시도 </label>
+          <select class="formbold-form-select" name="addressRegion" id="addressRegion"></select>
         </div>
   
         <div class="formbold-input-group">
-          <label for="mintemp" class="formbold-form-label"> 최소 기온 (&#8451) </label>
-          <input
-            type="text"
-            name="mintemp"
-            id="mintemp"
-            placeholder="최소 기온을 입력하세요"
-            class="formbold-form-input"
-            required="required"
-          />
+          <label class="formbold-form-label"> 시군구 </label>
+          <select class="formbold-form-select" name="addressDo" id="addressDo"></select>
         </div>
 
         <div class="formbold-input-group">
-          <label for="maxtemp" class="formbold-form-label"> 최대 기온 (&#8451) </label>
-          <input
-            type="text"
-            name="maxtemp"
-            id="maxtemp"
-            placeholder="최대 기온을 입력하세요"
-            class="formbold-form-input"
-            required="required"
-          />
+          <label class="formbold-form-label"> 읍면동 </label>
+          <select class="formbold-form-select" name="addressSiGunGu" id="addressSiGunGu"></select>
         </div>
   
-        <button class="formbold-btn">예측</button>
+        <button class="formbold-btn"> 예측 </button>
       </form>
     </div>
   </div>
+</body>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
     * {
@@ -163,3 +154,5 @@
       box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
     }
   </style>
+<script src="{{ url_for('static', filename='multiselect.js') }}"></script>
+</html>
