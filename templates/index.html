@@ -15,15 +15,37 @@
     <div class="formbold-form-wrapper">
       <div class="container">
         <div class="box-8">
-          <label for="name" class="formbold-form-title"> 모기 출몰 지수 예측기 </label>
-          <label for="name" class="formbold-form-label"> 기입된 정보를 기반으로 0~10 사이의 모기 출몰 지수를 예측합니다. </label>
+          <label for="name" class="formbold-form-title"> 
+            <a href="/"> 모기 출몰 지수 예측기 </a> 
+          </label>
+          <label for="name" class="formbold-form-label"> 선택한 지역의 기상 정보를 기반으로 0~10 사이의 지수를 예측합니다. </label>
         </div>
         <div class="box-2"><img src="{{ url_for('static', filename='image.gif') }}" width="100"></div>
       </div>
 
+      {% if show_error %}
+        <label for="name" class="formbold-form-label"> 지역을 읍면동 단위까지 선택해 주세요. </label>
+        <br>
+        <br>
+      {% endif %}
+
       {% if show_results %}
         <label for="name" class="formbold-form-label"> 예측된 모기 출몰 지수 : </label>
         <h1>{{ prediction_text }}</h1>
+        <br>
+        <br>
+        <label for="name" class="formbold-form-label">{{ today_year }}년 {{ today_month }}월 {{ today_day }}일, {{ loc1 }} {{ loc2 }} {{ loc3 }}</label>
+        <div class="container">
+          <div class="box-third">
+            <h6> 강수량 : {{ rain }}mm </h6>
+          </div>
+          <div class="box-third">
+            <h6> 최소 기온 : {{ mintemp }}&#8451 </h6>
+          </div>
+          <div class="box-third">
+            <h6> 최대 기온 : {{ maxtemp }}&#8451 </h6>
+          </div>
+        </div>
         <br>
         <br>
       {% endif %}
@@ -59,6 +81,9 @@
     body {
       font-family: 'Inter', sans-serif;
     }
+    a, u {
+      text-decoration: none;
+    }
     .container {
       display: flex;
       font-size:30px;
@@ -68,6 +93,9 @@
     }
     .box-2 {
       flex: 20;
+    }
+    .box-third {
+      flex: 33;
     }
 
     .formbold-main-wrapper {

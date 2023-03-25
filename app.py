@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template
 from scripts.weather_api import api_call
+from datetime import datetime
 import numpy as np
 import pickle
 
@@ -18,6 +19,10 @@ def home():
 @app.route('/predict', methods=['POST'])
 def predict():
     loc1, loc2, loc3 = request.form.values()
+
+    if (loc1 == "") | (loc2 == "") | (loc3 == ""):
+        return render_template('index.html', show_error = 1)
+
     api_resp = api_call(loc1, loc2, loc3)
     features = [api_resp['rain'], api_resp['min_temp'], api_resp['max_temp']]
     features = np.array(features).reshape(1,-1)
@@ -38,9 +43,18 @@ def predict():
     return render_template(
         'index.html', 
         prediction_text = str(output) + output_class,
-        show_results = 1 
+        loc1 = loc1,
+        loc2 = loc2,
+        loc3 = loc3,
+        rain = api_resp['rain'],
+        mintemp = api_resp['min_temp'],
+        maxtemp = api_resp['max_temp'],
+        today_year = datetime.today().year,
+        today_month = datetime.today().month,
+        today_day = datetime.today().day,
+        show_results = 1
     )
 
-#run
+# run
 if __name__ == "__main__":
     app.run(port=8000, debug=True)

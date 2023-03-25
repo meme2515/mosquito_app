@@ -82,7 +82,7 @@ def api_call(loc1, loc2, loc3, loc4=None):
             if item['fcstValue'] == '강수없음':
                 weather_data['rain'].append(0.0)
             else:
-                weather_data['rain'].append(float(item['fcstValue']))
+                weather_data['rain'].append(float(item['fcstValue'][:-2]))
     weather_data['rain'] = np.mean(weather_data['rain'])
 
     return weather_data
