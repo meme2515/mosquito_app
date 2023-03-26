@@ -2,4 +2,3 @@ model_train
 Dockerfile
 .git
 .gitignore
-/src/scripts/config.py
