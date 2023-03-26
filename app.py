@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template
-from scripts.weather_api import api_call
+from src.weather_api import api_call
 from datetime import datetime
 import numpy as np
 import pickle
@@ -8,7 +8,7 @@ import pickle
 app = Flask(__name__)
 
 # Load trained model (sklearn)
-model = pickle.load(open('models/model.pkl', 'rb'))
+model = pickle.load(open('src/model.pkl', 'rb'))
 
 # Home directory
 @app.route('/')
@@ -29,6 +29,8 @@ def predict():
     prediction = model.predict(features)
 
     output = min(round(prediction[0] / 100, 1), 10.0)
+    output = max(output, 0.1)
+
     if output < 2.0:
         output_class = " (안전)"
     elif output < 4.0:
@@ -46,9 +48,9 @@ def predict():
         loc1 = loc1,
         loc2 = loc2,
         loc3 = loc3,
-        rain = api_resp['rain'],
-        mintemp = api_resp['min_temp'],
-        maxtemp = api_resp['max_temp'],
+        rain = round(api_resp['rain'], 1),
+        mintemp = round(api_resp['min_temp'], 1),
+        maxtemp = round(api_resp['max_temp'], 1),
         today_year = datetime.today().year,
         today_month = datetime.today().month,
         today_day = datetime.today().day,

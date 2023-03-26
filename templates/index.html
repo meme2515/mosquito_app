@@ -16,7 +16,7 @@
       <div class="container">
         <div class="box-8">
           <label for="name" class="formbold-form-title"> 
-            <a href="/"> 모기 출몰 지수 예측기 </a> 
+            <a href="/"> 모기 활동 지수 예측기 </a> 
           </label>
           <label for="name" class="formbold-form-label"> 선택한 지역의 기상 정보를 기반으로 0~10 사이의 지수를 예측합니다. </label>
         </div>
@@ -24,13 +24,13 @@
       </div>
 
       {% if show_error %}
-        <label for="name" class="formbold-form-label"> 지역을 읍면동 단위까지 선택해 주세요. </label>
+        <label for="name" class="formbold-form-label"> 읍면동 단위까지 선택해 주세요. </label>
         <br>
         <br>
       {% endif %}
 
       {% if show_results %}
-        <label for="name" class="formbold-form-label"> 예측된 모기 출몰 지수 : </label>
+        <label for="name" class="formbold-form-label"> 예측된 모기 활동 지수 : </label>
         <h1>{{ prediction_text }}</h1>
         <br>
         <br>

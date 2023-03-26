@@ -6,7 +6,7 @@
 
 from urllib.parse import unquote
 from datetime import datetime, date, timedelta
-from scripts import config, convert_latlon
+from src import config, convert_latlon
 import requests
 import numpy as np
 import pandas as pd
@@ -26,7 +26,7 @@ yesterday = yesterday.strftime("%Y%m%d")
 
 # 서울 읍면동 단위 위경도 데이터
 out_df = pd.DataFrame()
-df = pd.read_excel('scripts/korea_latlon.xlsx', sheet_name=None)
+df = pd.read_excel('src/korea_latlon.xlsx', sheet_name=None)
 df = pd.concat(df.values())
 df = out_df.append(df,ignore_index=True)
 df = df.loc[~pd.isnull(df['읍면동/구'])]
